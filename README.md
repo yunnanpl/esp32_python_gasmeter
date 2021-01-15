@@ -1,7 +1,7 @@
 # esp32_python_gasmeter
 As the name says, it is about simple, stable gasmeter readout on esp32 using micropython.<br/>
 
-You need:
+You need:<br/>
 = ESP32 of almost any kind (I use https://www.amazon.de/AZDelivery-NodeMCU-Development-Nachfolgermodell-ESP8266/dp/B074RGW2VQ/)<br/>
 = reed sensor of probably any kind (I have https://www.amazon.de/gp/product/B07KTYW9DQ/)<br/>
 = some cables, usb charger for power
@@ -27,11 +27,11 @@ Created and tested on<br/>
 == even built-in in esp32 hall sensor might be fine (not tested, and it would require esp32 very near to the gasmeter)
 
 Gas meter:<br/>
-= Schlumberger G4 RF1 (with 1 impulse per 0.1 m^3)
-== impulse is on (magnet is near) between values x.x7 to x.x8
-== impulse is strong and clear, with shortest lifetime of 15 seconds
-== due to this rule, impulse is counted only if lasts 5 seconds (to avoid noise)
-== this would need to be corrected for counters with higher resolution per impulse (still, the sensor is fast enough to handle it easily)
+= Schlumberger G4 RF1 (with 1 impulse per 0.1 m^3)<br/>
+== impulse is on (magnet is near) between values x.x7 to x.x8<br/>
+== impulse is strong and clear, with shortest lifetime of 15 seconds<br/>
+== due to this rule, impulse is counted only if lasts 5 seconds (to avoid noise)<br/>
+== this would need to be corrected for counters with higher resolution per impulse (still, the sensor is fast enough to handle it easily)<br/>
 = would work with anything gas meter of this kind
 
 Helpful projects<br/>
