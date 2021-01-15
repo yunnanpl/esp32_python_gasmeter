@@ -38,5 +38,5 @@ Gas meter:<br/>
 = would work with anything gas meter of this kind
 
 Helpful projects<br/>
-https://github.com/yunnanpl/esp32_python_web (base for web)</br/>
+https://github.com/yunnanpl/esp32_python_web (base for web)
 
