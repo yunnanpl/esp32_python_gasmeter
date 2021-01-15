@@ -1,5 +1,5 @@
 # esp32_python_gasmeter
-As the name says, it is about simple, stable gasmeter readout on esp32 using micropython.<br/>
+As the name says, it is about simple, stable gasmeter readout on esp32 using micropython. It applies for gas meters with reed-type output.<br/>
 
 You need:<br/>
 = ESP32 of almost any kind<br/>
