@@ -3,9 +3,9 @@ As the name says, it is about simple, stable gasmeter readout on esp32 using mic
 
 You need:<br/>
 = ESP32 of almost any kind<br/>
-(I use https://www.amazon.de/AZDelivery-NodeMCU-Development-Nachfolgermodell-ESP8266/dp/B074RGW2VQ/)<br/>
+  (I use https://www.amazon.de/AZDelivery-NodeMCU-Development-Nachfolgermodell-ESP8266/dp/B074RGW2VQ/)<br/>
 = reed sensor of probably any kind<br/>
-(I have https://www.amazon.de/gp/product/B07KTYW9DQ/)<br/>
+  (I have https://www.amazon.de/gp/product/B07KTYW9DQ/)<br/>
 = some cables, usb charger for power<br/>
 = total cost expected 10 EUR
 
