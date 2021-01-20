@@ -1,4 +1,7 @@
 # esp32_python_gasmeter
+
+INFO: code and photos (installation and connection) will be posted soon.
+
 As the name says, it is about simple, stable gasmeter readout on esp32 using micropython. It applies for gas meters with reed-type output.<br/>
 
 You need:<br/>
@@ -10,15 +13,18 @@ You need:<br/>
 = total cost expected 10 EUR
 
 This version includes:<br/>
-= web server running in thread<br/>
+= web server running in thread, improved<br/>
 = web server showing total consumption (calculated current counter state)<br/>
 = web server showing daily consumption<br/>
-= hourly signal counting and consumption is available in the code (graph will be added)<br/>
+= hourly signal counting and consumption is available in the code<br/>
+== graph added, using chartist (delivering gzipped, around 10kb, acceptable size)
 = log file of signals (every valid signal is logged) (expected to overfill and destroy everything, to be solved)<br/>
+= auto reset if webserver fails
+= reset takes ~2-4 seconds, whereas magnet signal takes at shortest 15 seconds, so even during reboot, no signal should be lost
 
 Additional idea is:<br/>
 = add mqtt connection<br/>
-= add graph on esp32 server (probably completely local chartjs graph)
+= add graph on esp32 server (probably completely local chartjs graph) DONE
 
 Created and tested on<br/>
 = esp32-wroom-32 (from AZ-Delivery)<br/>
@@ -38,5 +44,5 @@ Gas meter info:<br/>
 = would work with anything gas meter of this kind
 
 Helpful projects<br/>
-https://github.com/yunnanpl/esp32_python_web (base for web)
-
+https://github.com/yunnanpl/esp32_python_web (base for web)<br/>
+== web server serving significantly improved, less memory usage
