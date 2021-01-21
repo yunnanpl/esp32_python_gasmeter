@@ -6,9 +6,9 @@ As the name says, it is about simple, stable gasmeter readout on esp32 using mic
 
 You need:<br/>
 = ESP32 of almost any kind<br/>
-  (I use https://www.amazon.de/AZDelivery-NodeMCU-Development-Nachfolgermodell-ESP8266/dp/B074RGW2VQ/)<br/>
+(I use https://www.amazon.de/AZDelivery-NodeMCU-Development-Nachfolgermodell-ESP8266/dp/B074RGW2VQ/)<br/>
 = reed sensor of probably any kind<br/>
-  (I have https://www.amazon.de/gp/product/B07KTYW9DQ/)<br/>
+(I have https://www.amazon.de/gp/product/B07KTYW9DQ/)<br/>
 = some cables, usb charger for power<br/>
 = total cost expected 10 EUR
 
@@ -31,6 +31,7 @@ Created and tested on<br/>
 == esp8266 might be possible, for lower power consumption, maybe battery run, but not sure how well micropython is running on it<br/>
 = KY-025 Reed Sensor<br/>
 = micropython, esp32-idf4-20201114-unstable-v1.13-173-g61d1e4b01.bin<br/>
+(https://micropython.org/download/esp32/)<br/>
 == some other sensors like simpler KY-021, or even a sensor tube without electronics might be used<br/>
 == probably KY-035 Hall sensor would be fine<br/>
 == even built-in in esp32 hall sensor might be fine (not tested, and it would require esp32 very near to the gasmeter)
