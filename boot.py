@@ -2,27 +2,26 @@
 
 from secret_cfg import *
 from offset import *
-# speedup :)
+# speedup/slow down for energy saving :)
 import machine
 machine.freq( config['freq'] )
 from machine import Pin, DAC, PWM, ADC, SoftI2C
 import network
 import ntptime
 import time
-import random
+#import random
 import _thread #experimental
 import socket
 import binascii
 #import bluetooth
 #ble = bluetooth.BLE()
-#import sys # for exceptions
+#import sys # for exceptions, not necessary
 
 #import umqtt.simple
 
 import gc
 gc.collect()
 
-#import bme280_float
 ### other useful modules
 #import sys
 #import os
@@ -57,11 +56,10 @@ webrepl.start()
 
 ### booting done
 # this needs to be later, as it uses modules
-from functions import *
+#from functions import *
 
 # define uptime
-#uptime = "{0:04d}-{1:02d}-{2:02d}".format( *localtime() ) +" {3:02d}:{4:02d}:{5:02d}".format( *localtime() ) + ''
-uptime = now()
+#uptime = now()
 # if all is done and led is on, then log successfull booting
 
 #leds = {}
@@ -90,7 +88,7 @@ del iii
 #i2c = SoftI2C(scl=Pin(32), sda=Pin(33), freq=10000, timeout=2000)
 #bme = bme280_float.BME280(i2c=i2c)
 
-# clean up the config variable, so that it is not available
+# clean up the config variable, so that it is not available after boot
 config = ''
 del config
 ### BOOTED
