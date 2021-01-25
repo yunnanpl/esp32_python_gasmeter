@@ -69,7 +69,11 @@ Gas meter info:
 
 ### Connected projects
 
-Helpful projects
+Connected projects
 
-+ https://github.com/yunnanpl/esp32_python_web (base for web)
++ Chartist js
+  + compressed js and css files are used for charts
+  + https://github.com/gionkunz/chartist-js
++ Base for webserver in micropython
   + web server serving significantly improved, less memory usage
+  + https://github.com/yunnanpl/esp32_python_web
