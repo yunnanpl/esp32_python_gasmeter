@@ -14,16 +14,16 @@ You need following hardware:
 ## Installation
 
 + flash micropython on esp32
-  + you need to find info somewhere else
+  + this is easy, but you need to know how to do this
 + fill the secret_cfg.py file
 + fill the offset.py file
 + upload all files to esp32
+  + not necesarily easy - I used webrepl, but it might require connecting to the esp32 through serial putty to connect to network
 + connect reed sensor to esp32
   + connect any power (3.3 or 5 V) from esp32 to reed
   + connect digital output from reed to pin 21 of esp32
-+ place reed sensor in the sensor slot of the
++ place reed sensor in the sensor slot of the gas meter
 + done
-  + you can find ip of the esp32 in your router
 
 ## Functionality
 
