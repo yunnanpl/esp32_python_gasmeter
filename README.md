@@ -49,9 +49,9 @@ Additional idea is:
 
 Created and tested on
 + esp32-wroom-32 (from AZ-Delivery)
-  + esp8266 might be possible, for lower power consumption, maybe battery run, but not sure how well micropython is running on it
+  + MAYBE esp8266 be possible, for lower power consumption, maybe battery run, but not sure how well micropython is running on it
 + KY-025 Reed Sensor
-  + some other sensors like simpler KY-021, or even a sensor tube without electronics might be used
+  + MAYBE some other sensors like simpler KY-021, or even a sensor tube without electronics might be used
   + probably KY-035 Hall sensor would be fine
   + even built-in in esp32 hall sensor might be fine (not tested, and it would require esp32 very near to the gasmeter)
 + micropython, esp32-idf4-20201114-unstable-v1.13-173-g61d1e4b01.bin (https://micropython.org/download/esp32/)
@@ -66,6 +66,7 @@ Gas meter info:
   + due to this rule, impulse is counted (is valid) only if lasts 3-5 seconds (to avoid noise)<br/>
   + this would need to be corrected for counters with higher resolution per impulse (still, the sensor is fast enough to handle it easily)<br/>
 + would work with anything gas meter of this kind
++ presumably there are also water meters with this kind of output
 
 ### Connected projects
 
