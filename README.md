@@ -34,11 +34,17 @@ This version includes:
 + web server showing daily consumption
 + hourly signal counting and consumption is available in the code
   + graph added, using chartist (delivering gzipped, around 10kb, acceptable size)
-+ log file of signals (every valid signal is logged) (expected to overfill and destroy everything, to be solved)
++ log file of signals (every valid signal is logged) (expected to overfill and destroy everything in 5 years :D, to be solved)
 + auto reset if webserver fails
 + saving the data (saving only hourly data - it is expected that the memory can hold 5+ years of data)
   + daily and total (and in future monthly ?) is recalculated from daily, so no errors expected
 + reset takes ~2-4 seconds, whereas magnet signal takes at shortest 15 seconds, so even during reboot, no signal should be lost
+
+## Current GUI looks
+
+No external hardware is needed for calculation or presentation, everything is included.
+
+![Current GUI](docs/image.png)
 
 ## To Do
 
