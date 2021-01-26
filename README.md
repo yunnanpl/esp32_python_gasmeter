@@ -44,6 +44,8 @@ This version includes:
 
 No external hardware is needed for calculation or presentation, everything is included.
 
+Clearly the graph is hourly (last 48 hours) and list is daily, but it is easy to change.
+
 ![Current GUI](docs/image.png)
 
 ## To Do
