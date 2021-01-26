@@ -43,6 +43,7 @@ This version includes:
 ## Current GUI looks
 
 No external hardware is needed for calculation or presentation, everything is included.
+GUI is accessible through any webbrowser (computer, mobile, etc.).
 
 Clearly the graph is hourly (last 48 hours) and list is daily, but it is easy to change.
 
