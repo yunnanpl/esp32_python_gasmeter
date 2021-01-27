@@ -79,7 +79,7 @@ Gas meter info:
 + would work with anything gas meter of this kind
 + presumably there are also water meters with this kind of output
 
-### Connected projects
+## Connected projects
 
 Connected projects
 
@@ -89,3 +89,25 @@ Connected projects
 + Base for webserver in micropython
   + web server serving significantly improved, less memory usage
   + https://github.com/yunnanpl/esp32_python_web
+
+
+## Similar projects
+
+Similar projects/approaches for the same kind of meters, or other meters
+
++ gas - computer vision
+  + https://github.com/michsvob/digit-recognition
+  + https://github.com/ParalelniPolis/ppplyn
+  + https://github.com/deviant-studio/energy-meter-scanner
+    + different meter
++ gas - other method
+  + https://github.com/RolandColored/smartmeter
+    + the same gas and water meter as I have :)
++ power - computer vision
+  + I solved mine with Shelly 3EM... with 1.02 calibration factor, it works perfectly ( get support from electrician ! )
+  + https://github.com/spidgorny/energy-monitor
++ water
+  + https://github.com/yamaton/water-meter-reading
++ other - photo
+  + https://github.com/murdho/pi-read-meter
+  
