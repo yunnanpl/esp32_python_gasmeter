@@ -44,14 +44,15 @@ vupdtime = now()
 # readout input value now and define global variable
 inpvv = inps[21].value()
 # creating tables
-countsnh = []
+countsnh = bytearray()
 countsnd = []
 countsnt = offset
 #counts = {}
 try:
     # try to load
-    aa = open('countsnh.txt', 'r')
-    countsnh = eval( aa.read() )
+    aa = open('countsnh.bin', 'rb')
+    #countsnh = eval( aa.read() )
+    countsnh = bytearray( aa.read() )
     aa.close()
     # recalculate temporary tables
     # daily
@@ -62,13 +63,13 @@ try:
        if ( kkk ) >= ( len( countsnd )*24 ):
           countsnd.append( 0 )
        countsnd[-1] += countsnh[kkk]
-       countsnt += countsnh[kkk] * resolution
+    countsnt = offset + ( sum( countsnh ) * resolution )
     # monthly/weekly ?
     del kkk
 except:
     # if new start, create file
-    aa = open('countsnh.txt', 'w')
-    countsnh = [ 0 ]
+    aa = open('countsnh.bin', 'wb')
+    countsnh = bytearray([ 0 ])
     countsnd = [ 0 ] # maybe will be created automatically...
     aa.write( str( countsnh ) )
     aa.close()
@@ -108,29 +109,38 @@ def cb_btn(ppp):
      countsnd[-1] += 1
      countsnt += 1 * resolution
      #
-     bb = open('countsnh.txt', 'w')
-     bb.write( str( countsnh ) )
+     bb = open('countsnh.bin', 'wb')
+     bb.write( countsnh )
      bb.close()
      #
      bb = open('hits.txt', 'a')
      # maybe recalculate this to epoch_seconds relative to offset ?
-     bb.write('\n' + str( now() ) +' '+ str( ppp ) +' '+ str( ppp.value() ) )
+     bb.write('\n' + str( time.time() ) +'_'+ str( ppp ) +'_'+ str( ppp.value() ) )
      bb.close()
      #
      del bb
+     webpagemain = web_page()
      gc.collect()
 
 # webpage generating function
 def web_page():
   # create chart, from last 48h
-  chart_inx = str( list( range( 1, len( countsnh[-48:] ) +1 ) ) )
-  chart_iny = str( [ x*resolution for x in countsnh[-48:] ] )
+  countsnha = list( reversed( list(countsnh)[-48:] ) )
+  #countsnha.reverse() # reverse short table for speed
+  # chart
+  chart_inx = str( list( range( 1, len( countsnha ) +1 ) ) )
+  chart_iny = str( [ x*resolution for x in countsnha ] )
 
   html_in = ""
   #generate table
-  for iii in range( len( countsnd ) ):
-      html_in = html_in + "<tr><td>" + str(time.gmtime( vofftime + (iii * 3600 * 24 ) ) ) + "</td><td>" + str( countsnd[iii] * resolution ) + "</td></tr>"
+  #countsnd.reverse()
+  for iii in list( reversed( range( len( countsnd ) ) ) ): # reversed
+      #html_in = html_in + "<tr><td>" + str(time.gmtime( vofftime + (iii * 3600 * 24 ) ) ) + "</td><td>" + str( countsnd[iii] * resolution ) + "</td></tr>"
+      #html_in = html_in + "<tr><td>" +  "-".join( map(str, time.gmtime( vofftime + (iii * 3600 * 24 ) )[0:3] ) ) + "</td><td>" + str( countsnd[iii] * resolution ) + "</td></tr>"
+      html_in = html_in + "<tr><td>" +  "-".join( map(lambda aaa: '{:0>{w}}'.format(str(aaa),w=2), time.gmtime( vofftime + (iii * 3600 * 24 ) )[0:3] ) ) + "</td><td>" + str( countsnd[iii] * resolution ) + "</td></tr>\n"
+      #"-".join( map(lambda aaa: '{:0>{w}}'.format(str(aaa),w=2), time.localtime()[0:3] ) )
   #generate rest of html
+  #Now: """ + now() + """<br/>
   html = """<!DOCTYPE html>
 <html lang="en" xml:lang="en">
 <head>
@@ -145,16 +155,16 @@ def web_page():
 <h1>Gas meter</h1>
 <h2>Counter</h2>
 Update: """ + str(vupdtime) + """<br/>
-Total: """ + str( ( int( ( countsnt )*10 ) )/10 ) + """
+Total: """ + str( ( int( ( countsnt )*10 ) )/10 ) + """<!--""" + str(countsnt) + """ -->
 <h2>System</h2>
-Now: """ + now() + """<br/>
 Boot: """ + uptime + """<br/>
 Links: <a href="/hits.txt">hits</a>, <a href="/countsnh.txt">counts</a>
-<h2>Daily</h2>
+<h2>Daily (m^3)</h2>
 <table>
 <tr><th>Date ----------------</th><th>Value -----</th></tr>
 """ + html_in + """
-<h2>Graph</h2>
+</table>
+<h2>Graph (hourly consumption)</h2>
 <div class="ct-chart"></div>
 <script>
 new Chartist.Line('.ct-chart', {
@@ -163,11 +173,18 @@ new Chartist.Line('.ct-chart', {
     """+ chart_iny +""",
   ]
 }, {
+  axisX: {
+    onlyInteger: true,
+    scaleMinSpace: 20
+  },
+  axisY: {
+    high: 1,
+    low: 0,
+    scaleMinSpace: 60
+  },
   width: '700px',
   height: '500px',
-  chartPadding: {
-    right: 40
-  }
+  chartPadding: 20
 });
 </script>
 </body>
@@ -175,6 +192,11 @@ new Chartist.Line('.ct-chart', {
   return( html )
 
 ###
+###
+# get clean page at boot
+
+webpagemain = web_page()
+
 ###
 
 ### webpage socket loop function
@@ -191,7 +213,7 @@ def loop_web():
   s.listen(5)
   ###
   webpage = ""
-  webpagel = ""
+  #webpagel = ""
   while keep_loop:
     # try to listen for connection
     try:
@@ -205,70 +227,74 @@ def loop_web():
       timer2 = time.ticks_ms()
       ###
       if request == "/ HT":
-         webpage = web_page()
-         webpagel = "Content-Length: " + str( len(webpage) ) + "\n"
+         #webpage = web_page()
+         webpage = webpagemain
          header = """HTTP/1.1 200 OK
 Content-Type: text/html
 Server-Timing: text;dur=""" + str( time.ticks_ms() - timer2 ) + """, req;dur=""" + str( timer2 - timer1 ) + """
+Content-Length: """ + str( len(webpage) ) + """
 Connection: close
 """
-         conn.sendall( header + webpagel + "\n" + webpage )
+         conn.sendall( header + "\n" + webpage )
          #continue
       ###
       elif request == "/hits.txt HT":
-         header = """HTTP/1.1 200 OK
-Content-Type: text/plain
-Connection: close
-"""
+         ###
          aa = open('hits.txt', 'r')
-         webpagelen = aa.seek(0,2)# + 11 #adding for pre
+         webpagelen = aa.seek(0,2)#
          aa.seek(0)
          #webpage = + str(aa.read()) +"</pre>"
-         webpagel = "Content-Length: " + str( webpagelen ) + "\n"
-         conn.send( header + webpagel + "\n" )
-         #conn.send( "<pre>" )
+         header = """HTTP/1.1 200 OK
+Content-Type: text/plain
+Content-Length: """ + str( webpagelen ) + """
+Connection: close
+"""
+         conn.send( header + "\n" )
+         #send partially
          while aa.tell() < webpagelen:
              conn.send( aa.read(1000) )
-         #conn.send( "</pre>" )
+         #
          aa.close()
          del aa
       ###
       elif request == "/countsnh.txt HT":
+         webpage = ""+ str(countsnh).replace(",", ",\n")  +""
          header = """HTTP/1.1 200 OK
 Content-Type: text/plain
+Content-Length: """ + str( len(webpage) ) + """
 Connection: close
 """
-         webpage = ""+ str(countsnh).replace(",", ",\n")  +""
-         webpagel = "Content-Length: " + str( len(webpage) ) + "\n"
-         conn.sendall( header + webpagel + "\n" + webpage )
+         conn.sendall( header + "\n" + webpage )
       ###
       elif request == "/chartist.min.js.gz HT":
-         header = """HTTP/1.1 200 OK
-Content-Encoding: gzip
-Content-Type: text/javascript
-Connection: close
-"""
          aa = open('chartist.min.js.gz', 'rb')
          webpage = aa.read()
          aa.close()
-         del aa
-         webpagel = "Content-Length: " + str( len(webpage) ) + "\n"
-         conn.send( header + webpagel + "\n" )
-         conn.sendall( webpage )
-      ###
-      elif request == "/chartist.min.css.gz HT":
          header = """HTTP/1.1 200 OK
 Content-Encoding: gzip
-Content-Type: text/css
+Content-Type: text/javascript
+Content-Length: """ + str( len(webpage) ) + """
 Connection: close
 """
+         conn.send( header + "\n" )
+         # sending separately is needed for binary ?
+         conn.sendall( webpage )
+         del aa
+      ###
+      elif request == "/chartist.min.css.gz HT":
+
          aa = open('chartist.min.css.gz', 'rb')
          webpage = aa.read()
          aa.close()
-         del aa
-         webpagel = "Content-Length: " + str( len(webpage) ) + "\n"
-         conn.send( header + webpagel + "\n" )
+         header = """HTTP/1.1 200 OK
+Content-Encoding: gzip
+Content-Type: text/css
+Content-Length: """ + str( len(webpage) ) + """
+Connection: close
+"""
+         conn.send( header + "\n" )
          conn.sendall( webpage )
+         del aa
       ###
       elif request == "/reset HT":
          header = """HTTP/1.1 302 Found
@@ -277,10 +303,6 @@ Location: /
 Connection: close
 
 """
-         #Content-Type: text/plain
-         #Content-Length: 25
-         #Connection: close
-         #303 Redirect due reboot.
          conn.sendall( header )
          conn.close()
          #time.sleep(2) # no sleep here ;)
@@ -306,7 +328,7 @@ Connection: close
     # cleaning up
     header = ""
     webpage = ""
-    webpagel = ""
+    #webpagel = ""
     gc.collect()
   ### END WHILE
   # the function ends if loop fails

@@ -4,7 +4,7 @@
 voffdate = ( 2021, 1, 15, 0, 0, 0, 0, 0, 0 )
 # following line works with time module, used later
 #vofftime = int(time.mktime(voffdate))
-offset = 23611.52
+offset = 23611.62
 
 # gas counter resolution
 # in case of resolution of 0.1, the counter sends one signal up and one down
