@@ -54,7 +54,14 @@ Clearly the graph is hourly (last 48 hours) and list is daily, but it is easy to
 Additional idea is:
 
 + add mqtt connection
-+ add graph on esp32 server (probably completely local chartjs graph) DONE
+
+### Changes
+
++ chartist graph added, smaller js than chartjs, but less "interactive"
++ memory optimisation - array as byte array (assumed less than 25 m^3 consumption per hour :D)
+  + 8kb data per year, but 400kb space available
++ page load improvement (first from 900ms, to 200ms, but dependent on data info )
++ page load improvement 2, changing only when counting triggered (from 200-400ms to 10ms)
 
 ## Running on
 
