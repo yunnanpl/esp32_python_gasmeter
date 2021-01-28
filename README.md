@@ -83,8 +83,8 @@ Gas meter info:
   + impulse is strong and clear, with shortest lifetime of 15 seconds<br/>
   + due to this rule, impulse is counted (is valid) only if lasts 3-5 seconds (to avoid noise)<br/>
   + this would need to be corrected for counters with higher resolution per impulse (still, the sensor is fast enough to handle it easily)<br/>
-+ would work with anything gas meter of this kind
-+ presumably there are also water meters with this kind of output
++ would work with any meter of this kind
+  + presumably there are also water meters with this kind of output
 
 ## Connected projects
 
@@ -109,9 +109,10 @@ Similar projects/approaches for the same kind of meters, or other meters
     + different meter
 + gas - other method
   + https://github.com/RolandColored/smartmeter
-    + the same gas and water meter as I have :)
+    + almost the same gas and water meter as I have :)
 + power - computer vision
   + I solved mine with Shelly 3EM... with 1.02 calibration factor, it works perfectly ( get support from electrician ! )
+    + I know it is 120 EUR, but it is worth it (if you do not have a smart meter with some kind of output, like me)
   + https://github.com/spidgorny/energy-monitor
 + water
   + https://github.com/yamaton/water-meter-reading
