@@ -62,6 +62,8 @@ Additional idea is:
   + 8kb data per year, but 400kb space available
 + page load improvement (first from 900ms, to 200ms, but dependent on data info )
 + page load improvement 2, changing only when counting triggered (from 200-400ms to 10ms)
++ switch from chartist to chartjs (larger, but easier for me)
++ introduced cache http messages to speed up loading, and lower the load on esp32
 
 ## Running on
 
