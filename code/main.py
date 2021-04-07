@@ -197,7 +197,9 @@ def web_page():
   html_in = ""
   #generate table
   #countsnd.reverse()
-  for iii in list( reversed( range( len( countsnd ) ) ) ): # reversed
+  #for iii in list( reversed( range( len( countsnd ) ) ) ): # reversed
+  # show last 15 days, and not everything
+  for iii in list( reversed( range( len( countsnd )-15, len( countsnd ) ) ) ): # reversed
       #iiiv = round( countsnd[iii] * vresolution, 2 )
       html_in = html_in + "<tr><td>" +  "-".join( map(lambda aaa: '{:0>{w}}'.format(str(aaa),w=2), time.gmtime( vofftime + (iii * 3600 * 24 ) )[0:3] ) ) + "</td><td>" + "{:.2f}".format( countsnd[iii] * vresolution ) + "</td><td>" + "{:.1f}".format( countsnd[iii] * vresolution * venergy ) +"</td></tr>\n"
       #
