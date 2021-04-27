@@ -83,10 +83,11 @@ def cb_btn(ppp):
      bb.write( countsnh )
      bb.close()
      #
-     bb = open('hits.txt', 'a')
+     # this is not necessary and takes a lot of space
+     #bb = open('hits.txt', 'a')
      # maybe recalculate this to epoch_seconds relative to offset ?
-     bb.write('\n' + str( time.time() ) +'_'+ str( ppp ) +'_'+ str( ppp.value() ) )
-     bb.close()
+     #bb.write('\n' + str( time.time() ) +'_'+ str( ppp ) +'_'+ str( ppp.value() ) )
+     #bb.close()
      #
      #gc.collect()
      # generate new page, but it has to be global
