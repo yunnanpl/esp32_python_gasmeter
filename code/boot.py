@@ -21,6 +21,7 @@ import _thread #experimental ?
 import socket
 #import binascii #spared
 import gc
+import os
 #import umqtt.simple
 
 #-###
