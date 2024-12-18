@@ -81,10 +81,10 @@ Additional idea is:
 + fill the offset.py file
 + upload all files to esp32
   + not necesarily easy - I used webrepl, but it might require connecting to the esp32 through serial putty to connect to network
-+ connect reed sensor to esp32
-  + connect any power (3.3 or 5 V) from esp32 to reed
-  + connect digital output from reed to pin 21 of esp32
-+ place reed sensor in the sensor slot of the gas meter
++ connect sensor to esp32
+  + connect any power (3.3 or 5 V) from esp32 to the sensor
+  + connect digital output from the sensor to pin 21 of esp32
++ place sensor in the sensor slot of the gas meter (recommended to use the 3d printed holder)
 + done
 
 There is a slot for a sensor. It is partially not important how the sensor is mounted, only the "glass-part" of the sensor has to be on the right side of the slot. My sensor is relatively large, and has a potentiometer, so it does not completely fit there (still, I will try to resolder the potentiometer, to hide the sensor in the slot).
@@ -97,7 +97,7 @@ You need following hardware:
 
 + ESP32 of almost any kind<br/>(I use https://www.amazon.de/AZDelivery-NodeMCU-Development-Nachfolgermodell-ESP8266/dp/B074RGW2VQ/)
 + probably any kind of magnetic sensor
-  + reed sensor of probably any kind<br/>(I have https://www.amazon.de/gp/product/B07KTYW9DQ/)<br/>(broke the glass, so I switched to Hall)
+  + Reed sensor of probably any kind<br/>(I have https://www.amazon.de/gp/product/B07KTYW9DQ/)<br/>(broke the glass, so I switched to Hall)
   + Hall sensor, with or without stabilisation, at best analog<br/>(U have this https://www.amazon.de/AZDelivery-KY-035-magnetischer-Sensor-Arduino/dp/B07ZZ8N4VC/)<br/>(I added a capacitator to smoothen the signal, but I also do averaging in the software).
 + some cables, usb charger for power
 + total cost expected 10 EUR
@@ -107,7 +107,8 @@ You need following hardware:
 Created and tested on
 + esp32-wroom-32 (from AZ-Delivery)
   + MAYBE esp8266 be possible, for lower power consumption, maybe battery run, but not sure how well micropython is running on it
-+ KY-025 Reed Sensor
++ <strike>KY-025 Reed Sensor</strike>
++ AZDelivery KY-035
   + MAYBE some other sensors like simpler KY-021, or even a sensor tube without electronics might be used
   + probably KY-035 Hall sensor would be fine
   + even built-in in esp32 hall sensor might be fine (not tested, and it would require esp32 very near to the gasmeter)
