@@ -71,6 +71,7 @@ Additional idea is:
 + switch from chartist to chartjs (larger, but easier for me)
 + introduced cache http messages to speed up loading, and lower the load on esp32
 + limited the list on the page to last 15 days, to speed up loading
++ NEW - 3d printed holder for Hall sensor and ESP32<br/>see Tinkercad https://www.tinkercad.com/things/6KYBnmwIYFq-gasreaderv10)
 
 # Installation
 
@@ -95,7 +96,9 @@ There is a slot for a sensor. It is partially not important how the sensor is mo
 You need following hardware:
 
 + ESP32 of almost any kind<br/>(I use https://www.amazon.de/AZDelivery-NodeMCU-Development-Nachfolgermodell-ESP8266/dp/B074RGW2VQ/)
-+ reed sensor of probably any kind<br/>(I have https://www.amazon.de/gp/product/B07KTYW9DQ/)
++ probably any kind of magnetic sensor
+  + reed sensor of probably any kind<br/>(I have https://www.amazon.de/gp/product/B07KTYW9DQ/)<br/>(broke the glass, so I switched to Hall)
+  + Hall sensor, with or without stabilisation, at best analog<br/>(U have this https://www.amazon.de/AZDelivery-KY-035-magnetischer-Sensor-Arduino/dp/B07ZZ8N4VC/)<br/>(I added a capacitator to smoothen the signal, but I also do averaging in the software).
 + some cables, usb charger for power
 + total cost expected 10 EUR
 
